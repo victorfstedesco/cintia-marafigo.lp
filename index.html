@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cintia Marafigo | Psicóloga Clínica & Neuropsicóloga</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B8599',
+                        primarydark: '#086676',
+                        dark: '#1A1A1A',
+                        darker: '#121212',
+                        light: '#FAFAFA', 
+                        surface: '#FFFFFF',
+                        bordercolor: '#EAEAEA'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(0,0,0,0.05)',
+                        'softer': '0 10px 30px -5px rgba(0,0,0,0.03)',
+                        'inner-light': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base styles */
+        body {
+            background-color: #FAFAFA;
+            color: #1A1A1A;
+            overflow-x: hidden;
+        }
+
+        /* Smooth reveal animation classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 100ms; }
+        .reveal-delay-2 { transition-delay: 200ms; }
+        .reveal-delay-3 { transition-delay: 300ms; }
+
+        /* Parallax Image Wrapper */
+        .parallax-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+        .parallax-img {
+            will-change: transform;
+            height: 120%;
+            width: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: -10%;
+            left: 0;
+        }
+
+        /* Glassmorphism */
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 1);
+        }
+
+        /* Button Hover Effects */
+        .btn-hover-magnetic {
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-hover-magnetic:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px -5px rgba(11, 133, 153, 0.25);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAFAFA; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0B8599; 
+            border-radius: 4px;
+        }
+
+        /* Sticky Service Cards Stacking */
+        .sticky-card {
+            position: sticky;
+            top: 100px;
+        }
+
+        /* FAQ accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, padding 0.4s ease;
+            opacity: 0;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            opacity: 1;
+            padding-bottom: 1.5rem;
+        }
+        .faq-icon {
+            transition: transform 0.4s ease;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-white relative">
+
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center glass-panel-light rounded-full mt-4 mx-4 shadow-sm border border-black/5">
+            <div class="text-xl font-serif font-bold text-dark tracking-wider flex items-center gap-2">
+                <img src="cintialogo.svg" alt="Cintia Marafigo" class="h-20">
+            </div>
+            
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide text-dark/70">
+                <a href="#sobre" class="hover:text-primary transition-colors">SOBRE</a>
+                <a href="#especialidades" class="hover:text-primary transition-colors">ESPECIALIDADES</a>
+                <a href="#processo" class="hover:text-primary transition-colors">JORNADA</a>
+                <a href="#depoimentos" class="hover:text-primary transition-colors">DEPOIMENTOS</a>
+                <a href="#faq" class="hover:text-primary transition-colors">PERGUNTAS</a>
+            </nav>
+
+            <a href="https://wa.me/5511999999999" target="_blank" class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-medium tracking-wide hover:bg-primarydark transition-colors btn-hover-magnetic flex items-center gap-2 shadow-sm">
+                Agendar Consulta
+                <i class="ph ph-arrow-right"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen min-h-[800px] w-full bg-light flex items-center justify-center overflow-hidden pt-20">
+        <!-- Parallax Background Image -->
+        <div class="absolute inset-0 parallax-wrapper z-0 opacity-20">
+            <img src="consultorio.jpeg" alt="Consultório" class="parallax-img filter sepia-[.1]" id="hero-bg">
+        </div>
+        
+        <!-- Gradient Overlay for light mode contrast -->
+        <div class="absolute inset-0 bg-gradient-to-t from-light via-light/80 to-transparent z-10"></div>
+
+        <div class="relative z-20 max-w-5xl mx-auto px-6 text-center text-dark layout-container">
+            <!-- Small Top Badge -->
+            <div class="reveal inline-flex items-center gap-2 border border-primary/20 bg-white px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest text-primary mb-8 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                PSICOLOGIA CLÍNICA & NEUROPSICOLOGIA
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="reveal reveal-delay-1 text-5xl md:text-7xl font-serif font-normal leading-tight mb-6 text-dark tracking-tight">
+                Redescubra sua essência <br>
+                através da <em class="text-primary italic font-semibold">compreensão.</em>
+            </h1>
+
+            <p class="reveal reveal-delay-2 text-lg md:text-xl text-dark/70 font-light max-w-2xl mx-auto mb-12">
+                Avaliação e reabilitação neuropsicológica e atendimento clínico voltado ao desenvolvimento da saúde mental.
+            </p>
+
+            <div class="reveal reveal-delay-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://wa.me/5511999999999" target="_blank" class="bg-primary text-white border border-transparent px-8 py-4 rounded-full text-sm font-semibold tracking-wide hover:bg-primarydark transition-colors btn-hover-magnetic w-full sm:w-auto shadow-md">
+                    Iniciar Acompanhamento
+                </a>
+                <a href="#sobre" class="bg-white border border-bordercolor text-dark px-8 py-4 rounded-full text-sm font-semibold tracking-wide hover:bg-gray-50 transition-colors btn-hover-magnetic w-full sm:w-auto shadow-sm">
+                    Conhecer a Especialista
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Telemetry / Stats Section (Overlapping hero) -->
+    <section class="relative z-30 -mt-20 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Stat 1 -->
+            <div class="reveal bg-white rounded-[32px] p-8 text-dark border border-bordercolor shadow-soft relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -z-10 group-hover:scale-110 transition-transform duration-500"></div>
+                <div class="text-primary mb-4"><i class="ph ph-hourglass-high text-4xl"></i></div>
+                <div class="font-serif text-5xl mb-2 italic font-medium">20+</div>
+                <div class="text-xs tracking-widest uppercase text-dark/50 font-semibold">Anos de Experiência</div>
+                <p class="text-sm text-dark/70 mt-4 font-light leading-relaxed">
+                    Duas décadas de dedicação contínua à psicologia e ao desenvolvimento humano estruturado.
+                </p>
+            </div>
+            <!-- Stat 2 -->
+            <div class="reveal reveal-delay-1 bg-primary rounded-[32px] p-8 text-white border border-primarydark shadow-soft relative overflow-hidden group">
+                <div class="absolute -right-10 -top-10 text-white/10 group-hover:rotate-12 transition-transform duration-700"><i class="ph-fill ph-brain text-[150px]"></i></div>
+                <div class="relative z-10">
+                    <div class="text-white/80 mb-4"><i class="ph ph-users text-4xl"></i></div>
+                    <div class="font-serif text-5xl mb-2 italic font-medium">20.000+</div>
+                    <div class="text-xs tracking-widest uppercase text-white/80 font-semibold">Atendimentos Clínicos</div>
+                    <p class="text-sm text-white/90 mt-4 font-light leading-relaxed">
+                        Milhares de histórias transformadas, auxiliando na superação de limites e autoconhecimento.
+                    </p>
+                </div>
+            </div>
+            <!-- Stat 3 -->
+            <div class="reveal reveal-delay-2 bg-white rounded-[32px] p-8 text-dark border border-bordercolor shadow-soft relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -z-10 group-hover:scale-110 transition-transform duration-500"></div>
+                <div class="text-primary mb-4"><i class="ph ph-certificate text-4xl"></i></div>
+                <div class="font-serif text-3xl mb-4 font-medium mt-2">Dupla Formação</div>
+                <div class="text-xs tracking-widest uppercase text-dark/50 font-semibold mb-4">Psicologia & Neuropsicologia</div>
+                <ul class="space-y-3 text-sm text-dark/70 font-light">
+                    <li class="flex gap-2 items-start"><i class="ph ph-check text-primary mt-0.5"></i> Avaliação Cognitiva</li>
+                    <li class="flex gap-2 items-start"><i class="ph ph-check text-primary mt-0.5"></i> Reabilitação Especializada</li>
+                    <li class="flex gap-2 items-start"><i class="ph ph-check text-primary mt-0.5"></i> Psicoterapia de Aprofundamento</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Philosophy / About Section -->
+    <section id="sobre" class="py-32 bg-FAFAFA px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16">
+            <div class="w-full md:w-1/2 relative reveal">
+                <!-- Image Wrapper with rounded-3xl and elaborately decorated border -->
+                <div class="relative rounded-[40px] p-2 bg-white shadow-soft border border-bordercolor">
+                    <img src="Cintia_Marafigo-02.jpg.jpeg" alt="Cintia Marafigo" class="w-full aspect-[4/5] object-cover rounded-[32px] filter">
+                </div>
+                <!-- Badge floating over image -->
+                <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-[24px] shadow-soft border border-bordercolor max-w-xs block">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-primary/10 p-3 rounded-full text-primary shadow-inner-light"><i class="ph-fill ph-quotes text-2xl"></i></div>
+                        <p class="text-sm font-medium font-serif italic text-dark leading-snug">"O autoconhecimento é o princípio estrutural de qualquer mudança real."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 reveal reveal-delay-1 mt-10 md:mt-0">
+                <span class="text-primary text-xs font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
+                    <span class="w-8 h-[1px] bg-primary"></span>
+                    A Especialista
+                </span>
+                <h2 class="text-4xl md:text-5xl font-serif text-dark mb-6 leading-tight font-medium">
+                    Cintia Marafigo
+                </h2>
+                <div class="space-y-6 text-dark/70 font-light text-lg leading-relaxed">
+                    <p>
+                        Com uma trajetória sólida de mais de <strong class="text-primary font-medium">20 anos de experiência</strong>, Cintia uniu as bases da psicologia clínica tradicional à precisão da neuropsicologia.
+                    </p>
+                    <p>
+                        Sua abordagem é estruturada e compassiva, desenhada para adolescentes e adultos que buscam compreender os meandros de seu funcionamento mental, afetivo e cognitivo.
+                    </p>
+                    <p>
+                        Tendo conduzido mais de <strong class="text-primary font-medium">20.000 atendimentos</strong>, seu consultório se tornou um ambiente focado em resultados reais, diagnósticos precisos e processos terapêuticos profundamente éticos.
+                    </p>
+                </div>
+                
+                <div class="mt-10">
+                    <a href="https://wa.me/5511999999999" target="_blank" class="inline-flex items-center gap-3 text-dark font-semibold text-sm tracking-widest uppercase hover:text-primary transition-colors hover:gap-5 duration-300">
+                        Fale com Cintia <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Disciplines / Services -->
+    <section id="especialidades" class="py-32 bg-white relative">
+        <div class="max-w-4xl mx-auto px-6 mb-20 text-center reveal">
+            <span class="text-primary text-xs font-bold tracking-widest uppercase mb-4 inline-block px-4 py-1.5 bg-primary/5 rounded-full">Abordagens Clínicas</span>
+            <h2 class="text-4xl md:text-6xl font-serif mb-6 text-dark">Áreas de <em class="italic text-primary">Atuação.</em></h2>
+            <p class="text-dark/60 font-light max-w-xl mx-auto text-lg leading-relaxed">
+                Metodologias suportadas pela neurociência e validadas por décadas de prática clínica.
+            </p>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6 relative space-y-12 pb-32">
+            
+            <!-- Card 1 -->
+            <div class="sticky-card reveal z-10 w-full bg-light border border-bordercolor rounded-[40px] p-8 md:p-14 flex flex-col md:flex-row gap-12 items-center shadow-soft" style="top: 100px;">
+                <div class="w-full md:w-1/2">
+                    <div class="text-primary font-mono text-sm mb-6 flex items-center gap-3 font-semibold">
+                        <span class="w-8 h-[2px] bg-primary block"></span> 01
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-serif mb-6 text-dark">Avaliação <br><em class="italic text-primary">Neuropsicológica</em></h3>
+                    <p class="text-dark/70 font-light mb-8 leading-relaxed">
+                        Investigação detalhada das funções cognitivas, comportamentais e emocionais, buscando identificar diagnósticos complexos como TDAH, Autismo (TEA), declínio cognitivo e outras síndromes neurológicas.
+                    </p>
+                    <ul class="space-y-4 text-sm text-dark/80 font-medium">
+                        <li class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-bordercolor"><i class="ph-fill ph-check-circle text-primary mt-0.5 text-lg"></i> Mapeamento cognitivo detalhado</li>
+                        <li class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-bordercolor"><i class="ph-fill ph-check-circle text-primary mt-0.5 text-lg"></i> Suporte diagnóstico para médicos</li>
+                        <li class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-bordercolor"><i class="ph-fill ph-check-circle text-primary mt-0.5 text-lg"></i> Orientação para escolas e famílias</li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/2 h-64 md:h-[450px] rounded-[32px] overflow-hidden relative bg-gradient-to-br from-white to-light flex items-center justify-center border border-bordercolor shadow-inner group">
+                    <!-- Nodes connection animation -->
+                    <div class="relative w-64 h-64 flex items-center justify-center">
+                        <!-- Connecting lines behind -->
+                        <div class="absolute w-[180px] h-[1px] bg-primary/20 rotate-45 group-hover:rotate-90 transition-all duration-1000 ease-in-out"></div>
+                        <div class="absolute w-[180px] h-[1px] bg-primary/20 -rotate-45 group-hover:-rotate-90 transition-all duration-1000 ease-in-out"></div>
+                        <div class="absolute w-[1px] h-[180px] bg-primary/20 group-hover:rotate-45 transition-all duration-1000 ease-in-out"></div>
+                        
+                        <!-- Core element -->
+                        <div class="absolute z-10 w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-soft border border-bordercolor group-hover:shadow-[0_0_40px_rgba(11,133,153,0.15)] transition-shadow duration-700">
+                            <i class="ph-thin ph-brain text-7xl text-primary group-hover:scale-110 transition-transform duration-500"></i>
+                        </div>
+                        
+                        <!-- Floating orbiting dots -->
+                        <div class="absolute inset-0 animate-[spin_10s_linear_infinite]">
+                            <div class="w-4 h-4 rounded-full bg-primary/40 absolute -top-2 left-1/2 -translate-x-1/2 backdrop-blur-sm"></div>
+                        </div>
+                        <div class="absolute inset-0 animate-[spin_15s_linear_infinite_reverse]">
+                            <div class="w-3 h-3 rounded-full bg-primary/60 absolute bottom-6 right-8 backdrop-blur-sm"></div>
+                        </div>
+                        <div class="absolute inset-0 animate-[spin_20s_linear_infinite]">
+                            <div class="w-5 h-5 rounded-full bg-primary/30 absolute top-1/2 -left-2 -translate-y-1/2 backdrop-blur-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="sticky-card reveal z-20 w-full bg-surface border border-bordercolor rounded-[40px] p-8 md:p-14 flex flex-col md:flex-row-reverse gap-12 items-center shadow-soft" style="top: 130px;">
+                <div class="w-full md:w-1/2">
+                    <div class="text-primary font-mono text-sm mb-6 flex items-center gap-3 font-semibold">
+                        <span class="w-8 h-[2px] bg-primary block"></span> 02
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-serif mb-6 text-dark">Reabilitação <br><em class="italic text-primary">Cognitiva</em></h3>
+                    <p class="text-dark/70 font-light mb-8 leading-relaxed">
+                        Programa de intervenção estruturado focado em recuperar ou compensar déficits cognitivos identificados, melhorando o desempenho na atenção, memória e funções executivas.
+                    </p>
+                    <ul class="space-y-4 text-sm text-dark/80 font-medium">
+                        <li class="flex items-start gap-3 bg-light p-3 rounded-xl border border-bordercolor"><i class="ph-fill ph-check-circle text-primary mt-0.5 text-lg"></i> Treinamento de foco e atenção</li>
+                        <li class="flex items-start gap-3 bg-light p-3 rounded-xl border border-bordercolor"><i class="ph-fill ph-check-circle text-primary mt-0.5 text-lg"></i> Estratégias de compensação de memória</li>
+                        <li class="flex items-start gap-3 bg-light p-3 rounded-xl border border-bordercolor"><i class="ph-fill ph-check-circle text-primary mt-0.5 text-lg"></i> Organização e planejamento diário</li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/2 h-64 md:h-[450px] rounded-[32px] overflow-hidden relative bg-gradient-to-tr from-light to-white flex items-center justify-center border border-bordercolor shadow-inner group">
+                    <div class="relative w-56 h-56 flex items-center justify-center">
+                        <!-- Expanding expanding rings -->
+                        <div class="absolute inset-0 rounded-full border border-primary/20 animate-[ping_4s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
+                        <div class="absolute inset-4 rounded-full border border-primary/30 animate-[ping_4s_cubic-bezier(0,0,0.2,1)_infinite]" style="animation-delay: 1s;"></div>
+                        
+                        <!-- Central cog/infinity structure -->
+                        <div class="absolute z-10 w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-soft border border-bordercolor">
+                            <i class="ph-thin ph-infinity text-6xl text-primary animate-[spin_8s_linear_infinite]"></i>
+                        </div>
+                        
+                        <!-- Puzzle pieces / floating shapes -->
+                        <div class="absolute top-4 left-4 text-primary/40 animate-bounce" style="animation-duration: 3s;"><i class="ph-fill ph-puzzle-piece text-2xl"></i></div>
+                        <div class="absolute bottom-6 right-6 text-primary/40 animate-bounce" style="animation-duration: 4s; animation-delay: 1s;"><i class="ph-fill ph-lightbulb text-3xl"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="sticky-card reveal z-30 w-full bg-light border border-bordercolor rounded-[40px] p-8 md:p-14 flex flex-col md:flex-row gap-12 items-center shadow-soft" style="top: 160px;">
+                <div class="w-full md:w-1/2">
+                    <div class="text-primary font-mono text-sm mb-6 flex items-center gap-3 font-semibold">
+                        <span class="w-8 h-[2px] bg-primary block"></span> 03
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-serif mb-6 text-dark">Psicologia <br><em class="italic text-primary">Clínica</em></h3>
+                    <p class="text-dark/70 font-light mb-8 leading-relaxed">
+                        Acolhimento psicológico voltado ao tratamento de ansiedade, depressão e crises vitais, guiando o paciente através do labirinto emocional para a regulação e bem-estar contínuo.
+                    </p>
+                    <ul class="space-y-4 text-sm text-dark/80 font-medium mb-8">
+                        <li class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-bordercolor"><i class="ph-fill ph-check-circle text-primary mt-0.5 text-lg"></i> Manejo de Transtornos de Ansiedade</li>
+                        <li class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-bordercolor"><i class="ph-fill ph-check-circle text-primary mt-0.5 text-lg"></i> Terapia para regulação emocional</li>
+                        <li class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-bordercolor"><i class="ph-fill ph-check-circle text-primary mt-0.5 text-lg"></i> Autoconhecimento e desenvolvimento</li>
+                    </ul>
+                    <a href="https://wa.me/5511999999999" target="_blank" class="bg-primary text-white px-8 py-4 rounded-full text-sm font-semibold tracking-wide hover:bg-primarydark transition-colors btn-hover-magnetic inline-block shadow-md">
+                        Agendar Horário
+                    </a>
+                </div>
+                <div class="w-full md:w-1/2 h-64 md:h-[450px] rounded-[32px] overflow-hidden relative bg-gradient-to-tl from-white to-light flex items-center justify-center border border-bordercolor shadow-inner group">
+                    <div class="relative w-64 h-64 flex items-center justify-center">
+                        <!-- Soft glowing background breathing effect -->
+                        <div class="absolute w-40 h-40 bg-primary/10 rounded-full blur-2xl animate-pulse" style="animation-duration: 4s;"></div>
+                        
+                        <!-- Two interacting speech bubbles/spheres -->
+                        <div class="absolute -left-4 w-32 h-32 bg-white rounded-t-full rounded-br-full rounded-bl-xl shadow-soft border border-bordercolor flex items-center justify-center group-hover:-translate-y-2 group-hover:-rotate-3 transition-transform duration-500 z-10">
+                            <i class="ph-thin ph-heart text-5xl text-primary animate-pulse"></i>
+                        </div>
+                        
+                        <div class="absolute -right-4 top-10 w-28 h-28 bg-primary/5 rounded-t-full rounded-bl-full rounded-br-xl shadow-soft border border-primary/20 flex items-center justify-center group-hover:-translate-y-4 group-hover:rotate-3 transition-transform duration-700">
+                            <i class="ph-thin ph-chat-centered-text text-4xl text-primary"></i>
+                        </div>
+                        
+                        <!-- Floating connection line -->
+                        <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 stroke-primary/30 stroke-[2] fill-none group-hover:stroke-primary/60 transition-colors" viewBox="0 0 100 50" style="stroke-dasharray: 4,4;">
+                            <path d="M 20 25 Q 50 -10 80 25" class="animate-[pulse_2s_infinite]" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="processo" class="py-32 bg-light px-6 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <span class="text-primary text-xs font-bold tracking-widest uppercase mb-4 inline-block px-4 py-1.5 bg-primary/5 rounded-full">A Jornada</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-dark mb-6">Como funciona o <em class="italic text-primary">Processo.</em></h2>
+                <p class="text-dark/60 font-light max-w-xl mx-auto text-lg leading-relaxed">
+                    Um caminho estruturado e transparente desde o nosso primeiro contato até o início do seu desenvolvimento.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative reveal reveal-delay-1">
+                <!-- Connecting Line for Desktop -->
+                <div class="hidden md:block absolute top-[40px] left-[12%] right-[12%] h-[2px] bg-bordercolor z-0"></div>
+
+                <!-- Step 1 -->
+                <div class="relative z-10 flex flex-col items-center text-center group mt-4 md:mt-0">
+                    <div class="w-20 h-20 rounded-full bg-white border-[6px] border-light flex items-center justify-center text-primary shadow-soft mb-6 group-hover:-translate-y-2 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                        <i class="ph-fill ph-chat-circle-dots text-3xl"></i>
+                    </div>
+                    <div class="text-primary font-mono text-sm font-semibold mb-2">01</div>
+                    <h4 class="text-xl font-serif font-bold text-dark mb-3">Contato</h4>
+                    <p class="text-sm text-dark/70 font-light px-4 leading-relaxed">Agende seu horário via WhatsApp de forma rápida e segura.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="relative z-10 flex flex-col items-center text-center group mt-10 md:mt-0">
+                    <div class="w-20 h-20 rounded-full bg-white border-[6px] border-light flex items-center justify-center text-primary shadow-soft mb-6 group-hover:-translate-y-2 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                        <i class="ph-fill ph-user-focus text-3xl"></i>
+                    </div>
+                    <div class="text-primary font-mono text-sm font-semibold mb-2">02</div>
+                    <h4 class="text-xl font-serif font-bold text-dark mb-3">Primeira Consulta</h4>
+                    <p class="text-sm text-dark/70 font-light px-4 leading-relaxed">Sessão de acolhimento e escuta para entendermos suas demandas.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="relative z-10 flex flex-col items-center text-center group mt-10 md:mt-0">
+                    <div class="w-20 h-20 rounded-full bg-white border-[6px] border-light flex items-center justify-center text-primary shadow-soft mb-6 group-hover:-translate-y-2 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                        <i class="ph-fill ph-map-trifold text-3xl"></i>
+                    </div>
+                    <div class="text-primary font-mono text-sm font-semibold mb-2">03</div>
+                    <h4 class="text-xl font-serif font-bold text-dark mb-3">Plano de Ação</h4>
+                    <p class="text-sm text-dark/70 font-light px-4 leading-relaxed">Direcionamento para Avaliação Neuropsicológica ou Psicoterapia.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="relative z-10 flex flex-col items-center text-center group mt-10 md:mt-0">
+                    <div class="w-20 h-20 rounded-full bg-white border-[6px] border-light flex items-center justify-center text-primary shadow-soft mb-6 group-hover:-translate-y-2 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                        <i class="ph-fill ph-plant text-3xl"></i>
+                    </div>
+                    <div class="text-primary font-mono text-sm font-semibold mb-2">04</div>
+                    <h4 class="text-xl font-serif font-bold text-dark mb-3">Acompanhamento</h4>
+                    <p class="text-sm text-dark/70 font-light px-4 leading-relaxed">Início prático do processo com metas visando sua evolução contínua.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="depoimentos" class="py-32 bg-white px-6">
+        <div class="max-w-6xl mx-auto reveal">
+            <div class="text-center mb-16">
+                <span class="text-primary text-xs font-bold tracking-widest uppercase mb-4 inline-block px-4 py-1.5 bg-primary/5 rounded-full">Depoimentos</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-dark mb-6">O que dizem os <em class="italic text-primary">Pacientes.</em></h2>
+                <p class="text-dark/60 font-light max-w-xl mx-auto text-lg leading-relaxed">
+                    Experiências reais de quem confiou em nosso trabalho para sua jornada de desenvolvimento.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Depoimento 1 -->
+                <div class="bg-light border border-bordercolor rounded-[32px] p-8 shadow-soft hover:-translate-y-2 transition-transform duration-300 relative group">
+                    <div class="absolute top-6 right-6 text-primary/10 group-hover:text-primary/20 transition-colors duration-300"><i class="ph-fill ph-quotes text-5xl"></i></div>
+                    <div class="flex items-center gap-4 mb-6 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden border border-bordercolor shadow-sm">
+                            <span class="text-primary font-bold text-xl uppercase font-serif">S</span>
+                        </div>
+                        <div>
+                            <h4 class="text-dark font-bold font-serif">Sueli Martins</h4>
+                            <div class="flex text-[#FABB05] gap-0.5 text-sm mt-1">
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-dark/70 font-light leading-relaxed text-sm relative z-10">
+                        "A Dra Cintia transmite paz, segurança e confiança. Seus encaminhamentos não soam como imposições, verdades únicas, mas me fazem enxergar novas possibilidades. Obrigada Dra., pelo atendimento ❤️"
+                    </p>
+                </div>
+
+                <!-- Depoimento 2 -->
+                <div class="bg-light border border-bordercolor rounded-[32px] p-8 shadow-soft hover:-translate-y-2 transition-transform duration-300 relative group reveal-delay-1">
+                    <div class="absolute top-6 right-6 text-primary/10 group-hover:text-primary/20 transition-colors duration-300"><i class="ph-fill ph-quotes text-5xl"></i></div>
+                    <div class="flex items-center gap-4 mb-6 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden border border-bordercolor shadow-sm">
+                            <span class="text-primary font-bold text-xl uppercase font-serif">E</span>
+                        </div>
+                        <div>
+                            <h4 class="text-dark font-bold font-serif">Eloisa Oliveira</h4>
+                            <div class="flex text-[#FABB05] gap-0.5 text-sm mt-1">
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-dark/70 font-light leading-relaxed text-sm relative z-10">
+                        "Cíntia é uma profissional maravilhosa, muito competente e experiente. Faço terapia com ela já há 5 anos e ela, sempre muito comprometida, tem me auxiliado a compreender e como agir diante das situações mais diversas da vida. Às vezes o olhar dela e uma palavra tira todo o pesar de algo que está nos desconfortando. Excelente psicóloga."
+                    </p>
+                </div>
+
+                <!-- Depoimento 3 -->
+                <div class="bg-light border border-bordercolor rounded-[32px] p-8 shadow-soft hover:-translate-y-2 transition-transform duration-300 relative group reveal-delay-2">
+                    <div class="absolute top-6 right-6 text-primary/10 group-hover:text-primary/20 transition-colors duration-300"><i class="ph-fill ph-quotes text-5xl"></i></div>
+                    <div class="flex items-center gap-4 mb-6 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden border border-bordercolor shadow-sm">
+                            <span class="text-primary font-bold text-xl uppercase font-serif">B</span>
+                        </div>
+                        <div>
+                            <h4 class="text-dark font-bold font-serif">Brunna Almeida</h4>
+                            <div class="flex text-[#FABB05] gap-0.5 text-sm mt-1">
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-dark/70 font-light leading-relaxed text-sm relative z-10">
+                        "Excelente profissional, já sou paciente há 5 anos e ela me ajudou de todas as formas a combater a depressão e traumas."
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-32 bg-light px-6">
+        <div class="max-w-4xl mx-auto reveal">
+            <div class="text-center mb-16">
+                <span class="text-primary text-xs font-bold tracking-widest uppercase mb-4 inline-block px-4 py-1.5 bg-primary/5 rounded-full">Dúvidas Comuns</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-dark mb-6">Perguntas <em class="italic text-primary">Frequentes.</em></h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item bg-white border border-bordercolor rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                        <span class="font-medium text-dark text-lg">Como funciona a primeira consulta?</span>
+                        <div class="bg-light p-2 rounded-full text-primary faq-icon">
+                            <i class="ph ph-plus text-xl"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 text-dark/70 font-light leading-relaxed">
+                        A primeira consulta é uma entrevista inicial (anamnese) onde conversaremos sobre sua história clínica, suas queixas atuais e definiremos os objetivos do processo. É um momento de acolhimento e escuta para entendermos qual a melhor abordagem para o seu caso.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item bg-white border border-bordercolor rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                        <span class="font-medium text-dark text-lg">Qual a diferença entre Psicologia Clínica e Neuropsicologia?</span>
+                        <div class="bg-light p-2 rounded-full text-primary faq-icon">
+                            <i class="ph ph-plus text-xl"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 text-dark/70 font-light leading-relaxed">
+                        A <strong class="text-primary font-medium">Psicologia Clínica</strong> foca no tratamento de questões emocionais, comportamentais e transtornos mentais através da psicoterapia. A <strong class="text-primary font-medium">Neuropsicologia</strong> é a ciência que investiga a relação entre o cérebro e o comportamento, realizando mapeamentos cognitivos (atenção, memória, funções executivas) para diagnósticos como TDAH ou TEA.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item bg-white border border-bordercolor rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                        <span class="font-medium text-dark text-lg">Quanto tempo dura uma Avaliação Neuropsicológica?</span>
+                        <div class="bg-light p-2 rounded-full text-primary faq-icon">
+                            <i class="ph ph-plus text-xl"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 text-dark/70 font-light leading-relaxed">
+                        Em média, o processo de avaliação neuropsicológica leva de 6 a 8 sessões, variando conforme a necessidade de cada paciente. Envolve entrevistas, aplicação de testes padronizados e sessões de devolutiva para entrega do laudo médico.
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="faq-item bg-white border border-bordercolor rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                        <span class="font-medium text-dark text-lg">Os atendimentos podem ser realizados Online?</span>
+                        <div class="bg-light p-2 rounded-full text-primary faq-icon">
+                            <i class="ph ph-plus text-xl"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 text-dark/70 font-light leading-relaxed">
+                        Sim, a psicoterapia clínica e as orientações familiares podem ser realizadas na modalidade online com total sigilo e eficácia. Contudo, para avaliações neuropsicológicas que dependem de testes específicos, os encontros costumam ser presenciais.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action / Footer -->
+    <section class="bg-primary relative py-32 overflow-hidden px-6 rounded-t-[40px] shadow-[0_-20px_50px_rgba(0,0,0,0.05)]">
+        <!-- Abstract BG patterns -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2, 4"></path>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="0.2"></circle>
+                <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="0.2"></circle>
+            </svg>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10 text-white flex flex-col items-center">
+            <div class="bg-white/10 p-4 rounded-full backdrop-blur-md mb-8 shadow-inner-light">
+                <i class="ph-fill ph-brain text-4xl"></i>
+            </div>
+            <h2 class="text-5xl md:text-7xl font-serif mb-8 leading-tight">
+                Inicie sua <em class="italic font-light">Evolução.</em>
+            </h2>
+            <p class="text-white/90 font-light text-xl max-w-2xl mx-auto mb-12">
+                O primeiro passo para a mudança é a decisão de olhar para si com a orientação técnica correta.
+            </p>
+            
+            <a href="https://wa.me/5511999999999" target="_blank" class="bg-white text-dark text-lg px-10 py-5 rounded-full font-semibold hover:bg-light transition-colors btn-hover-magnetic shadow-[0_15px_30px_rgba(0,0,0,0.15)] flex items-center gap-3 group">
+    <svg class="w-8 h-8 text-green" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Falar pelo WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-white text-dark/70 py-16 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-sm font-light">
+            <div class="md:col-span-2">
+                <div class="flex items-center gap-2 text-dark font-serif text-xl font-bold tracking-wider mb-6">
+                    <i class="ph ph-brain text-primary text-2xl"></i> CINTIA MARAFIGO
+                </div>
+                <p class="max-w-md leading-relaxed mb-6">
+                    Avaliação e reabilitação neuropsicológica e atendimento clínico voltado ao desenvolvimento da saúde mental.<br><br>
+                    <strong class="font-medium">CRP:</strong> 00/00000
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full border border-bordercolor flex flex-col items-center justify-center text-dark hover:bg-primary hover:text-white hover:border-primary transition-colors">
+                        <i class="ph-fill ph-instagram-logo text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-bordercolor flex flex-col items-center justify-center text-dark hover:bg-primary hover:text-white hover:border-primary transition-colors">
+                        <i class="ph-fill ph-linkedin-logo text-lg"></i>
+                    </a>
+                </div>
+                <p class="text-xs mt-8">© 2026 Cintia Marafigo. Todos os direitos reservados.</p>
+            </div>
+            
+            <div>
+                <h4 class="text-dark font-bold uppercase tracking-widest text-xs mb-6">Navegação</h4>
+                <ul class="space-y-4 font-medium">
+                    <li><a href="#sobre" class="hover:text-primary transition-colors">Sobre a Especialista</a></li>
+                    <li><a href="#especialidades" class="hover:text-primary transition-colors">Áreas de Atuação</a></li>
+                    <li><a href="#processo" class="hover:text-primary transition-colors">A Jornada</a></li>
+                    <li><a href="#depoimentos" class="hover:text-primary transition-colors">Depoimentos</a></li>
+                    <li><a href="#faq" class="hover:text-primary transition-colors">Dúvidas Comuns</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-dark font-bold uppercase tracking-widest text-xs mb-6">Contato</h4>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-3 font-medium"><i class="ph-fill ph-whatsapp-logo text-primary text-lg"></i> (11) 99999-9999</li>
+                    <li class="flex items-center gap-3 font-medium"><i class="ph-fill ph-envelope text-primary text-lg"></i> contato@cintiamarafigo.com.br</li>
+                    <li class="flex items-start gap-3 mt-4"><i class="ph-fill ph-map-pin text-primary mt-1 text-lg"></i> <span>Av. Paulista, 1000 - Bela Vista<br>São Paulo, SP</span></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5511999999999" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-fit h-fit p-6 gap-4 rounded-full flex items-center font-semibold justify-center shadow-[0_4px_20px_rgba(34,197,94,0.4)] btn-hover-magnetic z-50 hover:bg-green-600 transition-colors" aria-label="WhatsApp">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chamar no Whatsapp
+    </a>
+
+    <!-- Scripts for animations and behaviors -->
+    <script>
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Parallax Effect for Hero
+        const heroBg = document.getElementById('hero-bg');
+        if (heroBg) {
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if (scrollY < window.innerHeight) {
+                    heroBg.style.transform = `translateY(${scrollY * 0.4}px)`;
+                }
+            });
+        }
+
+        // Navbar blur and resize on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+                navbar.firstElementChild.classList.add('shadow-md');
+                navbar.firstElementChild.classList.remove('shadow-sm', 'mt-4');
+                navbar.firstElementChild.classList.add('mt-2');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+                navbar.firstElementChild.classList.remove('shadow-md');
+                navbar.firstElementChild.classList.add('shadow-sm', 'mt-4');
+                navbar.firstElementChild.classList.remove('mt-2');
+            }
+        });
+
+        // FAQ Toggle Logic
+        function toggleFaq(button) {
+            const faqItem = button.parentElement;
+            
+            // Close all other open FAQs
+            const allFaqs = document.querySelectorAll('.faq-item');
+            allFaqs.forEach(item => {
+                if (item !== faqItem && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Toggle active on clicked FAQ
+            faqItem.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
