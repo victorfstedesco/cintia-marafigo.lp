@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - Cintia Marafigo | Psicóloga Clínica & Neuropsicóloga</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B8599',
+                        primarydark: '#086676',
+                        dark: '#1A1A1A',
+                        darker: '#121212',
+                        light: '#FAFAFA', 
+                        surface: '#FFFFFF',
+                        bordercolor: '#EAEAEA'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(0,0,0,0.05)',
+                        'softer': '0 10px 30px -5px rgba(0,0,0,0.03)',
+                        'inner-light': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base styles */
+        body {
+            background-color: #FAFAFA;
+            color: #1A1A1A;
+            overflow-x: hidden;
+        }
+
+        /* Smooth reveal animation classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 100ms; }
+        .reveal-delay-2 { transition-delay: 200ms; }
+        .reveal-delay-3 { transition-delay: 300ms; }
+
+        /* Parallax Image Wrapper */
+        .parallax-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+        .parallax-img {
+            will-change: transform;
+            height: 120%;
+            width: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: -10%;
+            left: 0;
+        }
+
+        /* Glassmorphism */
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 1);
+        }
+
+        /* Button Hover Effects */
+        .btn-hover-magnetic {
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-hover-magnetic:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px -5px rgba(11, 133, 153, 0.25);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAFAFA; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0B8599; 
+            border-radius: 4px;
+        }
+
+        /* Sticky Service Cards Stacking */
+        .sticky-card {
+            position: sticky;
+            top: 100px;
+        }
+
+        /* FAQ accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, padding 0.4s ease;
+            opacity: 0;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            opacity: 1;
+            padding-bottom: 1.5rem;
+        }
+        .faq-icon {
+            transition: transform 0.4s ease;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+        #mobile-menu.hidden-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-white relative font-sans">
+
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="relative z-50 max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center glass-panel-light rounded-[2rem] mt-3 md:mt-4 mx-3 md:mx-4 shadow-sm border border-black/5">
+            <div class="font-serif font-bold tracking-wider flex items-center gap-2 z-20 relative">
+                <a href="../index.html"><img src="../cintialogo.svg" alt="Cintia Marafigo" class="h-10 md:h-14"></a>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide text-dark/70">
+                <a href="../index.html#sobre" class="hover:text-primary transition-colors">SOBRE</a>
+                <a href="../index.html#especialidades" class="hover:text-primary transition-colors">ESPECIALIDADES</a>
+                <a href="../index.html#processo" class="hover:text-primary transition-colors">JORNADA</a>
+                <a href="../index.html#depoimentos" class="hover:text-primary transition-colors">DEPOIMENTOS</a>
+                <a href="../index.html#faq" class="hover:text-primary transition-colors">PERGUNTAS</a>
+                <a href="../cursos/" class="hover:text-primary transition-colors">CURSOS</a>
+            </nav>
+
+            <div class="flex items-center gap-3 z-20 relative">
+                <a href="https://wa.me/5511999999999" target="_blank" class="hidden md:flex bg-primary text-white px-6 py-2.5 rounded-full text-sm font-medium tracking-wide hover:bg-primarydark transition-colors btn-hover-magnetic items-center gap-2 shadow-sm">
+                    Agendar Consulta
+                    <i class="ph ph-arrow-right"></i>
+                </a>
+                
+                <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 border border-bordercolor rounded-full bg-white/50 text-dark">
+                    <i class="ph ph-list text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden-menu absolute top-0 left-0 w-full pt-24 px-4 pb-6 bg-white/95 backdrop-blur-xl border-b border-bordercolor shadow-lg md:hidden">
+            <nav class="flex flex-col space-y-4 text-center mt-4">
+                <a href="../index.html#sobre" class="text-lg font-medium text-dark/80 hover:text-primary py-2 border-b border-bordercolor/50" onclick="toggleMobileMenu()">SOBRE</a>
+                <a href="../index.html#especialidades" class="text-lg font-medium text-dark/80 hover:text-primary py-2 border-b border-bordercolor/50" onclick="toggleMobileMenu()">ESPECIALIDADES</a>
+                <a href="../index.html#processo" class="text-lg font-medium text-dark/80 hover:text-primary py-2 border-b border-bordercolor/50" onclick="toggleMobileMenu()">JORNADA</a>
+                <a href="../index.html#depoimentos" class="text-lg font-medium text-dark/80 hover:text-primary py-2 border-b border-bordercolor/50" onclick="toggleMobileMenu()">DEPOIMENTOS</a>
+                <a href="../index.html#faq" class="text-lg font-medium text-dark/80 hover:text-primary py-2 border-b border-bordercolor/50" onclick="toggleMobileMenu()">PERGUNTAS</a>
+                <a href="../cursos/" class="text-lg font-medium text-dark/80 hover:text-primary py-2 border-b border-bordercolor/50" onclick="toggleMobileMenu()">CURSOS</a>
+                <a href="https://wa.me/5511999999999" target="_blank" class="bg-primary text-white px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-primarydark mt-4 inline-block shadow-sm">
+                    Agendar Consulta
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen min-h-[800px] w-full bg-light flex items-center justify-center overflow-hidden pt-20">
+        <!-- Parallax Background Image -->
+        <div class="absolute inset-0 parallax-wrapper z-0 opacity-20">
+            <!-- Using the same hero background image -->
+            <img src="../consultorio.jpeg" alt="Consultório" class="parallax-img filter sepia-[.1]" id="hero-bg">
+        </div>
+        
+        <!-- Gradient Overlay for light mode contrast -->
+        <div class="absolute inset-0 bg-gradient-to-t from-light via-light/80 to-transparent z-10"></div>
+
+        <div class="relative z-20 max-w-5xl mx-auto px-6 text-center text-dark layout-container">
+            <!-- Small Top Badge -->
+            <div class="reveal inline-flex items-center gap-2 border border-primary/20 bg-white px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest text-primary mb-8 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                NOVIDADES A CAMINHO
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="reveal reveal-delay-1 text-5xl md:text-7xl font-serif font-normal leading-tight mb-6 text-dark tracking-tight">
+                Cursos <em class="text-primary italic font-semibold">Em Breve.</em>
+            </h1>
+
+            <p class="reveal reveal-delay-2 text-lg md:text-xl text-dark/70 font-light max-w-2xl mx-auto mb-12">
+                Estamos preparando conteúdos exclusivos para aprimorar seu conhecimento e desenvolvimento, com o mesmo cuidado e qualidade de nossos atendimentos.
+            </p>
+
+            <div class="reveal reveal-delay-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="../index.html" class="bg-primary text-white border border-transparent px-8 py-4 rounded-full text-sm font-semibold tracking-wide hover:bg-primarydark transition-colors btn-hover-magnetic w-full sm:w-auto shadow-md">
+                    Voltar para a Página Inicial
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action / Footer -->
+    <section class="bg-primary relative py-32 overflow-hidden px-6 rounded-t-[40px] shadow-[0_-20px_50px_rgba(0,0,0,0.05)]">
+        <!-- Abstract BG patterns -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2, 4"></path>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="0.2"></circle>
+                <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="0.2"></circle>
+            </svg>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10 text-white flex flex-col items-center">
+            <div class="bg-white/10 p-4 rounded-full backdrop-blur-md mb-8 shadow-inner-light">
+                <i class="ph-fill ph-brain text-4xl"></i>
+            </div>
+            <h2 class="text-5xl md:text-7xl font-serif mb-8 leading-tight">
+                Inicie sua <em class="italic font-light">Evolução.</em>
+            </h2>
+            <p class="text-white/90 font-light text-xl max-w-2xl mx-auto mb-12">
+                O primeiro passo para a mudança é a decisão de olhar para si com a orientação técnica correta.
+            </p>
+            
+            <a href="https://wa.me/5511999999999" target="_blank" class="bg-white text-dark text-lg px-10 py-5 rounded-full font-semibold hover:bg-light transition-colors btn-hover-magnetic shadow-[0_15px_30px_rgba(0,0,0,0.15)] flex items-center gap-3 group">
+                <svg class="w-8 h-8 text-green" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Chamar no Whatsapp
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-white text-dark/70 py-16 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-sm font-light">
+            <div class="md:col-span-2">
+                <div class="flex items-center gap-2 text-dark font-serif text-xl font-bold tracking-wider mb-6">
+                    <i class="ph ph-brain text-primary text-2xl"></i> CINTIA MARAFIGO
+                </div>
+                <p class="max-w-md leading-relaxed mb-6">
+                    Avaliação e reabilitação neuropsicológica e atendimento clínico voltado ao desenvolvimento da saúde mental.<br><br>
+                    <strong class="font-medium">CRP:</strong> 00/00000
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full border border-bordercolor flex flex-col items-center justify-center text-dark hover:bg-primary hover:text-white hover:border-primary transition-colors">
+                        <i class="ph-fill ph-instagram-logo text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-bordercolor flex flex-col items-center justify-center text-dark hover:bg-primary hover:text-white hover:border-primary transition-colors">
+                        <i class="ph-fill ph-linkedin-logo text-lg"></i>
+                    </a>
+                </div>
+                <p class="text-xs mt-8">© 2026 Cintia Marafigo. Todos os direitos reservados.</p>
+            </div>
+            
+            <div>
+                <h4 class="text-dark font-bold uppercase tracking-widest text-xs mb-6">Navegação</h4>
+                <ul class="space-y-4 font-medium">
+                    <li><a href="../index.html#sobre" class="hover:text-primary transition-colors">Sobre a Especialista</a></li>
+                    <li><a href="../index.html#especialidades" class="hover:text-primary transition-colors">Áreas de Atuação</a></li>
+                    <li><a href="../index.html#processo" class="hover:text-primary transition-colors">A Jornada</a></li>
+                    <li><a href="../index.html#depoimentos" class="hover:text-primary transition-colors">Depoimentos</a></li>
+                    <li><a href="../index.html#faq" class="hover:text-primary transition-colors">Dúvidas Comuns</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-dark font-bold uppercase tracking-widest text-xs mb-6">Contato</h4>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-3 font-medium"><i class="ph-fill ph-whatsapp-logo text-primary text-lg"></i> (11) 99999-9999</li>
+                    <li class="flex items-center gap-3 font-medium"><i class="ph-fill ph-envelope text-primary text-lg"></i> contato@cintiamarafigo.com.br</li>
+                    <li class="flex items-start gap-3 mt-4"><i class="ph-fill ph-map-pin text-primary mt-1 text-lg"></i> <span>Av. Paulista, 1000 - Bela Vista<br>São Paulo, SP</span></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5511999999999" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-fit h-fit p-4 md:p-6 gap-3 md:gap-4 rounded-full flex items-center font-semibold justify-center shadow-[0_4px_20px_rgba(34,197,94,0.4)] btn-hover-magnetic z-50 hover:bg-green-600 transition-colors" aria-label="WhatsApp">
+        <svg class="w-7 h-7 md:w-8 md:h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="hidden md:inline">Chamar no Whatsapp</span>
+    </a>
+
+    <!-- Scripts for animations and behaviors -->
+    <script>
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Parallax Effect for Hero
+        const heroBg = document.getElementById('hero-bg');
+        if (heroBg) {
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if (scrollY < window.innerHeight) {
+                    heroBg.style.transform = `translateY(${scrollY * 0.4}px)`;
+                }
+            });
+        }
+
+        // Navbar blur and resize on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+                navbar.firstElementChild.classList.add('shadow-md');
+                navbar.firstElementChild.classList.remove('shadow-sm', 'mt-4');
+                navbar.firstElementChild.classList.add('mt-2');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+                navbar.firstElementChild.classList.remove('shadow-md');
+                navbar.firstElementChild.classList.add('shadow-sm', 'mt-4');
+                navbar.firstElementChild.classList.remove('mt-2');
+            }
+        });
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMobileMenuOpen = false;
+
+        function toggleFaq(button) {
+            const faqItem = button.parentElement;
+            
+            const allFaqs = document.querySelectorAll('.faq-item');
+            allFaqs.forEach(item => {
+                if (item !== faqItem && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+
+            faqItem.classList.toggle('active');
+        }
+
+        function toggleMobileMenu() {
+            isMobileMenuOpen = !isMobileMenuOpen;
+            if (isMobileMenuOpen) {
+                mobileMenu.classList.remove('hidden-menu');
+                mobileMenuBtn.innerHTML = '<i class="ph ph-x text-xl"></i>';
+            } else {
+                mobileMenu.classList.add('hidden-menu');
+                mobileMenuBtn.innerHTML = '<i class="ph ph-list text-xl"></i>';
+            }
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        }
+    </script>
+</body>
+</html>
